@@ -1,0 +1,6 @@
+@Painel.Investimento.API_HostAddress = http://localhost:5140
+
+GET {{Painel.Investimento.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
