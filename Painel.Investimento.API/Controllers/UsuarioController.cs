@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Painel.investimento.Infra.Data;
 using Painel.Investimento.Domain.Dtos;
@@ -6,7 +7,7 @@ using Painel.Investimento.Domain.Dtos;
 namespace Painel.Investimento.API.Controllers
 {
     [ApiController]
-    [Route("api/usuarios")]
+    [Route("/[controller]")]
     public class UsuarioController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -19,6 +20,7 @@ namespace Painel.Investimento.API.Controllers
         }
 
         [HttpGet("{id}")]
+       
         public async Task<ActionResult<UsuarioDto>> GetById(int id)
         {
             try

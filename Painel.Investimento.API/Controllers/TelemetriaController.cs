@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Painel.Investimento.Application.Services;
 using Painel.Investimento.Domain.Dtos.TelemetriaDto;
 
 namespace Painel.Investimento.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     public class TelemetriaController : ControllerBase
     {
         private readonly ITelemetriaService _telemetriaService;
@@ -16,6 +17,7 @@ namespace Painel.Investimento.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult<TelemetriaResponse> GetTelemetria([FromQuery] DateTime inicio, [FromQuery] DateTime fim)
         {
             try

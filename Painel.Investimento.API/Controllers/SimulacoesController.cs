@@ -2,11 +2,13 @@
 using AutoMapper;
 using Painel.Investimento.Domain.Dtos;
 using Painel.Investimento.Aplication.useCaseSimulacoes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Painel.Investimento.API.Controllers
 {
     [ApiController]
-    [Route("api")]
+    [Route("/[controller]")]
+
     public class SimulacoesController : ControllerBase
     {
         private readonly ConsultarSimulacoesAgrupadasUseCase _useCase;
@@ -26,7 +28,8 @@ namespace Painel.Investimento.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("simular-investimento")]
+        [HttpPost("/simular-investimento")]
+        [Authorize]
         public async Task<ActionResult<SimulacaoInvestimentoResponse>> Simular([FromBody] SimulacaoInvestimentoRequest request)
         {
             try
@@ -46,7 +49,8 @@ namespace Painel.Investimento.API.Controllers
         /// <summary>
         /// Retorna todas as simulações realizadas
         /// </summary>
-        [HttpGet("simulacoes")]
+        [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<SimulacaoResumoDto>>> GetSimulacoes()
         {
             try
@@ -60,7 +64,8 @@ namespace Painel.Investimento.API.Controllers
             }
         }
 
-        [HttpGet("simulacoes/{clienteId}")]
+        [HttpGet("/{clienteId}")]
+        [Authorize]
         public async Task<ActionResult<SimulacaoHistoricoResponse>> GetHistorico(int clienteId)
         {
             try
@@ -83,6 +88,7 @@ namespace Painel.Investimento.API.Controllers
         /// Endpoint que calcula a rentabilidade percentual e verifica se é rentável
         /// </summary>
         [HttpGet("{id}/rentabilidade")]
+        [Authorize]
         public async Task<IActionResult> GetRentabilidade(int id, [FromQuery] decimal minimoPercentual)
         {
             try
@@ -103,7 +109,8 @@ namespace Painel.Investimento.API.Controllers
         /// <summary>
         /// Endpoint retorna Simulações por dia e produto
         /// </summary>
-        [HttpGet("simulacoes/por-produto-dia")]
+        [HttpGet("/simulacoes/por-produto-dia")]
+        [Authorize]
         public async Task<IActionResult> GetSimulacoesAgrupadas()
         {
             try

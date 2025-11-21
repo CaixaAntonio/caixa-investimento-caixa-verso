@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Painel.Investimento.Aplication.UseCaseInvestimentos;
 using Painel.Investimento.Aplication.UseCasesCadastros;
@@ -8,7 +9,7 @@ using Painel.Investimento.Domain.Repository.Abstract;
 using Painel.Investimento.Domain.Valueobjects;
 
 [ApiController]
-[Route("api")]
+[Route("/[controller]")]
 public class ClienteController : ControllerBase
 {
     private readonly ClienteUseCase _useCase;
@@ -28,7 +29,8 @@ public class ClienteController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpGet("perfil-risco-dinamico/{clienteId:int}")]
+    [HttpGet("/perfil-risco/{clienteId:int}")]
+    [Authorize]
     public async Task<ActionResult<object>> GetPerfilRisco(int clienteId)
     {
         try
@@ -54,7 +56,8 @@ public class ClienteController : ControllerBase
         }
     }
 
-    [HttpPost]
+    [HttpPost("registrar")]
+    [Authorize]
     public async Task<IActionResult> Post([FromBody] ClienteRequestDto dto)
     {
         try
@@ -84,12 +87,13 @@ public class ClienteController : ControllerBase
         }
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetById(int id)
+    [HttpGet("cliente/{clientId:int}")]
+    [Authorize]
+    public async Task<IActionResult> GetById(int clientId)
     {
         try
         {
-            var cliente = await _useCase.ObterPorIdAsync(id);
+            var cliente = await _useCase.ObterPorIdAsync(clientId);
             if (cliente == null) return NotFound();
 
             var response = _mapper.Map<ClienteResponseDto>(cliente);
@@ -101,12 +105,13 @@ public class ClienteController : ControllerBase
         }
     }
 
-    [HttpPut("{id:int}/perfil")]
-    public async Task<IActionResult> AtualizarPerfil(int id, [FromBody] PerfilDeRiscoRequestDto dto)
+    [HttpPut("perfil/{clientId:int}")]
+    [Authorize]
+    public async Task<IActionResult> AtualizarPerfil(int clientId, [FromBody] PerfilDeRiscoRequestDto dto)
     {
         try
         {
-            var clienteAtualizado = await _useCase.AtualizarPerfilAsync(id, dto.Id);
+            var clienteAtualizado = await _useCase.AtualizarPerfilAsync(clientId, dto.Id);
             if (clienteAtualizado == null) return NotFound();
 
             var response = _mapper.Map<ClienteResponseDto>(clienteAtualizado);
@@ -118,12 +123,13 @@ public class ClienteController : ControllerBase
         }
     }
 
-    [HttpDelete("{id:int}")]
-    public async Task<IActionResult> Delete(int id)
+    [HttpDelete("cliente/{clientId:int}")]
+    [Authorize]
+    public async Task<IActionResult> Delete(int clientId)
     {
         try
         {
-            var removido = await _useCase.RemoverAsync(id);
+            var removido = await _useCase.RemoverAsync(clientId);
             if (!removido) return NotFound();
 
             return NoContent();
@@ -135,7 +141,8 @@ public class ClienteController : ControllerBase
     }
 
     // Exemplo para Endereço
-    [HttpPost("{clienteId}/enderecos")]
+    [HttpPost("enderecos/{clienteId}")]
+    [Authorize]
     public async Task<IActionResult> AdicionarEndereco(int clienteId, [FromBody] EnderecoRequest dto)
     {
         try

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Painel.Investimento.Aplication.UseCasesProdutos;
 using Painel.Investimento.Domain.Dtos;
@@ -6,8 +7,9 @@ using Painel.Investimento.Domain.Models;
 
 namespace Painel.Investimento.API.Controllers
 {
-    [Route("api/produtoinvestimento")]
+   
     [ApiController]
+    [Route("/[controller]")]
     public class ProdutoInvestimentoController : ControllerBase
     {
         private readonly ProdutoInvestimentoUseCase _useCase;
@@ -24,12 +26,13 @@ namespace Painel.Investimento.API.Controllers
         /// <summary>
         /// Recomenda produtos de investimento para o cliente
         /// </summary>
-        [HttpGet("produtos-recomendados/{clienteId}")]
-        public async Task<ActionResult<IEnumerable<ProdutoRecomendadoDto>>> GetProdutosRecomendados(int clienteId)
+        [HttpGet("/produtos-recomendados/{perfil}")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<ProdutoRecomendadoDto>>> GetProdutosRecomendados(int perfil)
         {
             try
             {
-                var result = await _recomenda.ExecuteAsync(clienteId);
+                var result = await _recomenda.ExecuteAsync(perfil);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -40,6 +43,7 @@ namespace Painel.Investimento.API.Controllers
 
         // ✅ POST: api/produtoinvestimento
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post([FromBody] ProdutoInvestimentoRequestDto dto)
         {
             try
@@ -68,6 +72,7 @@ namespace Painel.Investimento.API.Controllers
 
         // ✅ GET: api/produtoinvestimento/{id}
         [HttpGet("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -86,6 +91,7 @@ namespace Painel.Investimento.API.Controllers
 
         // ✅ GET: api/produtoinvestimento
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -102,6 +108,7 @@ namespace Painel.Investimento.API.Controllers
 
         // ✅ PUT: api/produtoinvestimento/{id}
         [HttpPut("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Put(int id, [FromBody] ProdutoInvestimentoRequestDto dto)
         {
             try
@@ -131,6 +138,7 @@ namespace Painel.Investimento.API.Controllers
 
         // ✅ DELETE: api/produtoinvestimento/{id}
         [HttpDelete("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             try

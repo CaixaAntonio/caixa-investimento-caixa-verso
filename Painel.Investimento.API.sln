@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Painel.investimento.Infra",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Painel.Investimento.IntegrationTests", "Painel.Investimento.IntegrationTests\Painel.Investimento.IntegrationTests.csproj", "{FC001D6F-07B6-4F0B-A501-626814F8748F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Painel.Investimento.Testes", "Painel.Investimento.Testes\Painel.Investimento.Testes.csproj", "{644139EB-0FC7-4982-8F51-D12550CECDBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Painel.Investimento.Testes", "Painel.Investimento.Testes\Painel.Investimento.Testes.csproj", "{644139EB-0FC7-4982-8F51-D12550CECDBA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{B03F5FCE-C12C-49B6-A9E2-5353C3054F49}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

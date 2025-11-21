@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Painel.Investimento.Aplication.UseCaseInvestimentos;
 using Painel.Investimento.Aplication.UseCasesProdutos;
@@ -8,7 +9,8 @@ using Painel.Investimento.Domain.Models;
 namespace Painel.Investimento.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
+
     public class InvestimentosController : ControllerBase
     {
         private readonly InvestimentosUseCase _useCase;
@@ -24,7 +26,8 @@ namespace Painel.Investimento.API.Controllers
         }
 
         // ✅ Registrar novo investimento
-        [HttpPost]
+        [HttpPost("registrar")]
+        [Authorize]
         public async Task<ActionResult<InvestimentoDto>> Post([FromBody] CreateInvestimentoDto dto)
         {
             try
@@ -51,6 +54,7 @@ namespace Painel.Investimento.API.Controllers
 
         // ✅ Registrar retirada
         [HttpPost("retirar-investimento")]
+        [Authorize]
         public async Task<ActionResult<InvestimentoDto>> RetiraInvestimento([FromBody] RetiradaInvestimentoDto dto)
         {
             try
@@ -78,7 +82,8 @@ namespace Painel.Investimento.API.Controllers
         }
 
         // ✅ Obter investimento por Id
-        [HttpGet("por-investimentoId/{id}")]
+        [HttpGet("/por-investimentoId/{id}")]
+        [Authorize]
         public async Task<ActionResult<InvestimentoDto>> GetByIdInvestimmento(int id)
         {
             try
@@ -96,7 +101,8 @@ namespace Painel.Investimento.API.Controllers
         }
 
         // ✅ Listar investimentos de um cliente
-        [HttpGet("{clienteId}")]
+        [HttpGet("/investimentos/{clienteId}")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<InvestimentoResumoDto>>> GetByCliente(int clienteId)
         {
             try
@@ -125,7 +131,8 @@ namespace Painel.Investimento.API.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("/atualiza-investimento{id}")]
+        [Authorize]
         public async Task<ActionResult<InvestimentoDto>> Put(int id, [FromBody] InvestimentoDto dto)
         {
             try
@@ -143,12 +150,13 @@ namespace Painel.Investimento.API.Controllers
         }
 
         // ✅ Remover investimento
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("/investimento/{investimentoId}")]
+        [Authorize]
+        public async Task<ActionResult> Delete(int investimentoId)
         {
             try
             {
-                var removido = await _useCase.RemoverAsync(id);
+                var removido = await _useCase.RemoverAsync(investimentoId);
                 if (!removido)
                     return NotFound();
 

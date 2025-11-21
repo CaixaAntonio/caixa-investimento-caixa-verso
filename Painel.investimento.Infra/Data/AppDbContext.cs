@@ -2,6 +2,7 @@
 using Painel.investimento.Infra.Mappings.Configurations;
 using Painel.Investimento.Domain.Models;
 using Painel.Investimento.Infra.Configurations;
+using Painel.Investimento.Infra.Data;
 using Painel.Investimento.Infra.Data.Configurations;
 
 namespace Painel.investimento.Infra.Data
@@ -20,7 +21,7 @@ namespace Painel.investimento.Infra.Data
         public DbSet<Transacao> Transacoes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Simulacao> Simulacoes { get; set; }
-
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

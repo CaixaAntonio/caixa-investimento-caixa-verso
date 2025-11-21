@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Painel.Investimento.Aplication.UseCasesProdutos;
 using Painel.Investimento.Domain.Dtos;
@@ -6,8 +7,9 @@ using Painel.Investimento.Domain.Models;
 
 namespace Painel.Investimento.API.Controllers
 {
-    [Route("api/perfilproduto")]
+
     [ApiController]
+    [Route("/[controller]")]
     public class PerfilProdutoController : ControllerBase
     {
         private readonly PerfilProdutoUseCase _useCase;
@@ -20,7 +22,8 @@ namespace Painel.Investimento.API.Controllers
         }
 
         // ✅ POST: api/perfilproduto
-        [HttpPost]
+        [HttpPost("registrar")]
+        [Authorize]
         public async Task<IActionResult> Post([FromBody] PerfilProdutoRequestDto dto)
         {
             try
@@ -39,7 +42,8 @@ namespace Painel.Investimento.API.Controllers
         }
 
         // ✅ GET: api/perfilproduto
-        [HttpGet]
+        [HttpGet("recuperar-todos")]
+        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -55,12 +59,13 @@ namespace Painel.Investimento.API.Controllers
         }
 
         // ✅ GET: api/perfilproduto/{perfilDeRiscoId}/{produtoInvestimentoId}
-        [HttpGet("{perfilDeRiscoId:int}/{produtoInvestimentoId:int}")]
-        public async Task<IActionResult> GetByIds(int perfilDeRiscoId, int produtoInvestimentoId)
+        [HttpGet("recuperar-por-id/{perfRiscId:int}/{prodInvestId:int}")]
+        [Authorize]
+        public async Task<IActionResult> GetByIds(int perfRiscId, int prodInvestId)
         {
             try
             {
-                var perfilProduto = await _useCase.ObterPorIdsAsync(perfilDeRiscoId, produtoInvestimentoId);
+                var perfilProduto = await _useCase.ObterPorIdsAsync(perfRiscId, prodInvestId);
                 if (perfilProduto == null) return NotFound("Perfil ou produto não encontrado.");
 
                 var response = _mapper.Map<PerfilProdutoResponseDto>(perfilProduto);
@@ -73,12 +78,13 @@ namespace Painel.Investimento.API.Controllers
         }
 
         // ✅ DELETE: api/perfilproduto/{perfilDeRiscoId}/{produtoInvestimentoId}
-        [HttpDelete("{perfilDeRiscoId:int}/{produtoInvestimentoId:int}")]
-        public async Task<IActionResult> Delete(int perfilDeRiscoId, int produtoInvestimentoId)
+        [HttpDelete("delete/{perfRiscoId:int}/{produtInvestId:int}")]
+        [Authorize]
+        public async Task<IActionResult> Delete(int perfRiscoId, int produtInvestId)
         {
             try
             {
-                var removido = await _useCase.RemoverAsync(perfilDeRiscoId, produtoInvestimentoId);
+                var removido = await _useCase.RemoverAsync(perfRiscoId, produtInvestId);
                 if (!removido) return NotFound("Perfil ou produto não encontrado para remoção.");
 
                 return NoContent();

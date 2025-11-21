@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\gabri\\OneDrive\\Documentos\\Caixa-Investimento-CV\\caixa-investimento-caixa-verso\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{644139EB-0FC7-4982-8F51-D12550CECDBA}|Painel.Investimento.Testes\\Painel.Investimento.Testes.csproj|c:\\users\\gabri\\onedrive\\documentos\\caixa-investimento-cv\\caixa-investimento-caixa-verso\\painel.investimento.testes\\usecasetests\\consultarsimulacoesagrupadasusecasetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{644139EB-0FC7-4982-8F51-D12550CECDBA}|Painel.Investimento.Testes\\Painel.Investimento.Testes.csproj|solutionrelative:painel.investimento.testes\\usecasetests\\consultarsimulacoesagrupadasusecasetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{93CC6848-3006-41EA-A012-6371D4038E01}|Painel.Investimento.API\\Painel.Investimento.API.csproj|c:\\users\\gabri\\onedrive\\documentos\\caixa-investimento-cv\\caixa-investimento-caixa-verso\\painel.investimento.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93CC6848-3006-41EA-A012-6371D4038E01}|Painel.Investimento.API\\Painel.Investimento.API.csproj|solutionrelative:painel.investimento.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93CC6848-3006-41EA-A012-6371D4038E01}|Painel.Investimento.API\\Painel.Investimento.API.csproj|c:\\users\\gabri\\onedrive\\documentos\\caixa-investimento-cv\\caixa-investimento-caixa-verso\\painel.investimento.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{93CC6848-3006-41EA-A012-6371D4038E01}|Painel.Investimento.API\\Painel.Investimento.API.csproj|solutionrelative:painel.investimento.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ConsultarSimulacoesAgrupadasUseCaseTests.cs",
-              "DocumentMoniker": "C:\\Users\\gabri\\OneDrive\\Documentos\\Caixa-Investimento-CV\\caixa-investimento-caixa-verso\\Painel.Investimento.Testes\\UseCaseTests\\ConsultarSimulacoesAgrupadasUseCaseTests.cs",
-              "RelativeDocumentMoniker": "Painel.Investimento.Testes\\UseCaseTests\\ConsultarSimulacoesAgrupadasUseCaseTests.cs",
-              "ToolTip": "C:\\Users\\gabri\\OneDrive\\Documentos\\Caixa-Investimento-CV\\caixa-investimento-caixa-verso\\Painel.Investimento.Testes\\UseCaseTests\\ConsultarSimulacoesAgrupadasUseCaseTests.cs",
-              "RelativeToolTip": "Painel.Investimento.Testes\\UseCaseTests\\ConsultarSimulacoesAgrupadasUseCaseTests.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAAAEQAAAAxAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\gabri\\OneDrive\\Documentos\\Caixa-Investimento-CV\\caixa-investimento-caixa-verso\\Painel.Investimento.API\\Program.cs",
+              "RelativeDocumentMoniker": "Painel.Investimento.API\\Program.cs",
+              "ToolTip": "C:\\Users\\gabri\\OneDrive\\Documentos\\Caixa-Investimento-CV\\caixa-investimento-caixa-verso\\Painel.Investimento.API\\Program.cs",
+              "RelativeToolTip": "Painel.Investimento.API\\Program.cs",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAcwKkAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T12:46:00.359Z",
+              "WhenOpened": "2025-11-21T22:12:37.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\gabri\\OneDrive\\Documentos\\Caixa-Investimento-CV\\caixa-investimento-caixa-verso\\Painel.Investimento.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Painel.Investimento.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\gabri\\OneDrive\\Documentos\\Caixa-Investimento-CV\\caixa-investimento-caixa-verso\\Painel.Investimento.API\\appsettings.json",
+              "RelativeToolTip": "Painel.Investimento.API\\appsettings.json",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBEAAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-21T22:09:39.698Z",
               "EditorCaption": ""
             }
           ]

@@ -17,6 +17,7 @@ using Painel.Investimento.Domain.Models;
 using Painel.Investimento.Domain.Repository.Abstract;
 using Painel.Investimento.Domain.Services;
 using Painel.Investimento.Infra.Auth;
+using Painel.Investimento.Infra.Data;
 using Painel.Investimento.Infra.Repositorie;
 using Painel.Investimento.Infra.Repositories;
 using Painel.Investimento.Infra.Repository;
@@ -140,13 +141,33 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<TelemetriaMiddleware>();
 
-
 //Seed inicial
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    await UsuarioSeeder.SeedAdminAsync(db);
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+//    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+//    // 1. Garante que o banco existe
+//    await DatabaseSeeder.EnsureDatabaseExistsAsync(configuration, db);
+
+//    // 2. Aplica migrations → cria a tabela Cliente
+//    await db.Database.MigrateAsync();
+
+    // 3. Popula a tabela Cliente
+    //await ClienteSeeder.SeedClientesAsync(db);
+    //await PerfilDeRiscoSeeder.SeedPerfisDeRiscoAsync(db);
+    //await ProdutoInvestimentoSeeder.SeedProdutosAsync(db);
+    //await PerfilProdutoSeeder.SeedPerfilProdutosAsync(db);
+    //await EnderecoSeeder.SeedEnderecosAsync(db);
+    //await InvestimentosSeeder.SeedInvestimentosAsync(db);
+//}
+
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+//    await UsuarioSeeder.SeedAdminAsync(db);
+//}
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();

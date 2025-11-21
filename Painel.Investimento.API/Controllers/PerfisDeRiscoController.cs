@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Painel.Investimento.Domain.Repository.Abstract;
 
 namespace Painel.Investimento.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     public class PerfisDeRiscoController : ControllerBase
     {
         private readonly IPerfilDeRiscoRepository _perfilRepo;
@@ -21,6 +22,7 @@ namespace Painel.Investimento.API.Controllers
         /// Retorna todos os perfis de risco cadastrados.
         /// </summary>
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<PerfilDeRiscoDto>>> GetPerfis()
         {
             try
@@ -39,11 +41,12 @@ namespace Painel.Investimento.API.Controllers
         /// Retorna um perfil de risco específico pelo Id.
         /// </summary>
         [HttpGet("{PerfiDeRiscoId:int}")]
-        public async Task<ActionResult<PerfilDeRiscoDto>> GetPerfil(int id)
+        [Authorize]
+        public async Task<ActionResult<PerfilDeRiscoDto>> GetPerfil(int PerfiDeRiscoId)
         {
             try
             {
-                var perfil = await _perfilRepo.GetByIdAsync(id);
+                var perfil = await _perfilRepo.GetByIdAsync(PerfiDeRiscoId);
                 if (perfil == null)
                     return NotFound("Perfil de risco não encontrado.");
 

@@ -1,4 +1,5 @@
 ﻿using BCrypt.Net;
+using Microsoft.AspNetCore.Identity;
 using Painel.investimento.Infra.Data;
 using Painel.Investimento.Domain.Models;
 using Painel.Investimento.Infra.Data;
@@ -12,12 +13,16 @@ public static class UsuarioSeeder
             var admin = new Usuario
             {
                 Username = "admin",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("123456"),
                 Role = "admin"
             };
+
+            // Usa o mesmo PasswordHasher que o login
+            var passwordHasher = new PasswordHasher<Usuario>();
+            admin.PasswordHash = passwordHasher.HashPassword(admin, "123456");
 
             context.Usuarios.Add(admin);
             await context.SaveChangesAsync();
         }
     }
+
 }

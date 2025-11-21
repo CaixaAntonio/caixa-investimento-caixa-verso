@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Painel.investimento.Infra.Data;
+using Painel.Investimento.Domain.Models;
 using Painel.Investimento.Domain.Services;
 using Painel.Investimento.Infra.Data;
 using System.IdentityModel.Tokens.Jwt;
@@ -23,12 +26,19 @@ namespace Painel.Investimento.Infra.Auth
 
         public async Task<bool> ValidateCredentialsAsync(string username, string password)
         {
-            // ⚠️ Exemplo simples: valida usuário no banco
             var user = await _context.Usuarios
-                .FirstOrDefaultAsync(u => u.Username == username && u.PasswordHash == password);
+                .FirstOrDefaultAsync(u => u.Username == username);
 
-            return user != null;
+            if (user == null)
+                return false;
+
+            // Usa PasswordHasher para validar
+            var passwordHasher = new PasswordHasher<Usuario>();
+            var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
+
+            return result == PasswordVerificationResult.Success;
         }
+
 
         public async Task<string> GenerateTokenAsync(string username, string role)
         {
