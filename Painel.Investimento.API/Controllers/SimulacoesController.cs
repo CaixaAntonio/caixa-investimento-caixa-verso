@@ -14,8 +14,11 @@ namespace Painel.Investimento.API.Controllers
         private readonly ConsultarHistoricoSimulacoesUseCase _consultarHistorico;
         private readonly IMapper _mapper;
 
-        public SimulacoesController(ConsultarSimulacoesAgrupadasUseCase useCase, SimularInvestimentoUseCase simularInvestimento,
-            ConsultarHistoricoSimulacoesUseCase consultarHistorico, IMapper mapper)
+        public SimulacoesController(
+            ConsultarSimulacoesAgrupadasUseCase useCase,
+            SimularInvestimentoUseCase simularInvestimento,
+            ConsultarHistoricoSimulacoesUseCase consultarHistorico,
+            IMapper mapper)
         {
             _useCase = useCase;
             _simularInvestimento = simularInvestimento;
@@ -26,13 +29,18 @@ namespace Painel.Investimento.API.Controllers
         [HttpPost("simular-investimento")]
         public async Task<ActionResult<SimulacaoInvestimentoResponse>> Simular([FromBody] SimulacaoInvestimentoRequest request)
         {
-            var useCaseRequest = _mapper.Map<SimulacaoInvestimentoRequest>(request);
+            try
+            {
+                var useCaseRequest = _mapper.Map<SimulacaoInvestimentoRequest>(request);
+                var useCaseResponse = await _simularInvestimento.ExecuteAsync(useCaseRequest);
+                var response = _mapper.Map<SimulacaoInvestimentoResponse>(useCaseResponse);
 
-            var useCaseResponse = await _simularInvestimento.ExecuteAsync(useCaseRequest);
-
-            var response = _mapper.Map<SimulacaoInvestimentoResponse>(useCaseResponse);
-
-            return Ok(response);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao simular investimento: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -41,30 +49,39 @@ namespace Painel.Investimento.API.Controllers
         [HttpGet("simulacoes")]
         public async Task<ActionResult<IEnumerable<SimulacaoResumoDto>>> GetSimulacoes()
         {
-            var result = await _simularInvestimento.ListarTodasAsync();
-            return Ok(result);
+            try
+            {
+                var result = await _simularInvestimento.ListarTodasAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao listar simulações: {ex.Message}");
+            }
         }
-
 
         [HttpGet("simulacoes/{clienteId}")]
         public async Task<ActionResult<SimulacaoHistoricoResponse>> GetHistorico(int clienteId)
         {
-            var useCaseResponse = await _consultarHistorico.ExecuteAsync(clienteId);
+            try
+            {
+                var useCaseResponse = await _consultarHistorico.ExecuteAsync(clienteId);
 
-            if (useCaseResponse.Simulacoes == null || !useCaseResponse.Simulacoes.Any())
-                return NotFound("Nenhuma simulação encontrada para este cliente.");
+                if (useCaseResponse.Simulacoes == null || !useCaseResponse.Simulacoes.Any())
+                    return NotFound("Nenhuma simulação encontrada para este cliente.");
 
-            var response = _mapper.Map<SimulacaoHistoricoResponse>(useCaseResponse);
-
-            return Ok(response);
+                var response = _mapper.Map<SimulacaoHistoricoResponse>(useCaseResponse);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao consultar histórico de simulações: {ex.Message}");
+            }
         }
 
         /// <summary>
         /// Endpoint que calcula a rentabilidade percentual e verifica se é rentável
         /// </summary>
-        /// <param name="id">Id da simulação</param>
-        /// <param name="minimoPercentual">Percentual mínimo esperado</param>
-        /// <returns></returns>
         [HttpGet("{id}/rentabilidade")]
         public async Task<IActionResult> GetRentabilidade(int id, [FromQuery] decimal minimoPercentual)
         {
@@ -77,18 +94,27 @@ namespace Painel.Investimento.API.Controllers
             {
                 return NotFound(ex.Message);
             }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao calcular rentabilidade: {ex.Message}");
+            }
         }
 
         /// <summary>
-        /// Endpoint retorna Simulaçoes por dia e produto
+        /// Endpoint retorna Simulações por dia e produto
         /// </summary>
-        /// <returns></returns>
-
         [HttpGet("simulacoes/por-produto-dia")]
         public async Task<IActionResult> GetSimulacoesAgrupadas()
         {
-            var result = await _useCase.ExecuteAsync();
-            return Ok(result);
+            try
+            {
+                var result = await _useCase.ExecuteAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao consultar simulações agrupadas: {ex.Message}");
+            }
         }
     }
 }

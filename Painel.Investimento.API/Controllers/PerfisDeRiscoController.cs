@@ -11,7 +11,6 @@ namespace Painel.Investimento.API.Controllers
         private readonly IPerfilDeRiscoRepository _perfilRepo;
         private readonly IMapper _mapper;
 
-        // ✅ Apenas um construtor
         public PerfisDeRiscoController(IPerfilDeRiscoRepository perfilRepo, IMapper mapper)
         {
             _perfilRepo = perfilRepo;
@@ -24,12 +23,16 @@ namespace Painel.Investimento.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PerfilDeRiscoDto>>> GetPerfis()
         {
-            var perfis = await _perfilRepo.GetAllAsync();
-
-            // ✅ Mapeia lista para lista
-            var dtoList = _mapper.Map<IEnumerable<PerfilDeRiscoDto>>(perfis);
-
-            return Ok(dtoList);
+            try
+            {
+                var perfis = await _perfilRepo.GetAllAsync();
+                var dtoList = _mapper.Map<IEnumerable<PerfilDeRiscoDto>>(perfis);
+                return Ok(dtoList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao listar perfis de risco: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -38,14 +41,19 @@ namespace Painel.Investimento.API.Controllers
         [HttpGet("{PerfiDeRiscoId:int}")]
         public async Task<ActionResult<PerfilDeRiscoDto>> GetPerfil(int id)
         {
-            var perfil = await _perfilRepo.GetByIdAsync(id);
-            if (perfil == null)
-                return NotFound();
+            try
+            {
+                var perfil = await _perfilRepo.GetByIdAsync(id);
+                if (perfil == null)
+                    return NotFound("Perfil de risco não encontrado.");
 
-            // ✅ Mapeia objeto único
-            var dto = _mapper.Map<PerfilDeRiscoDto>(perfil);
-
-            return Ok(dto);
+                var dto = _mapper.Map<PerfilDeRiscoDto>(perfil);
+                return Ok(dto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao buscar perfil de risco: {ex.Message}");
+            }
         }
     }
 }

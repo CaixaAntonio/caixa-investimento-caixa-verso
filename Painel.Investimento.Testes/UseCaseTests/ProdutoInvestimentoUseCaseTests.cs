@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Moq;
 using Xunit;
+using Microsoft.Extensions.Logging;
 using Painel.Investimento.Aplication.UseCasesProdutos;
 using Painel.Investimento.Domain.Models;
 using Painel.Investimento.Domain.Repository.Abstract;
@@ -11,13 +12,20 @@ public class ProdutoInvestimentoUseCaseTests
 {
     private readonly Mock<IProdutoInvestimentoRepository> _repositoryMock;
     private readonly Mock<IUnitOfWork> _unitOfWorkMock;
+    private readonly Mock<ILogger<ProdutoInvestimentoUseCase>> _loggerMock;
     private readonly ProdutoInvestimentoUseCase _useCase;
 
     public ProdutoInvestimentoUseCaseTests()
     {
         _repositoryMock = new Mock<IProdutoInvestimentoRepository>();
         _unitOfWorkMock = new Mock<IUnitOfWork>();
-        _useCase = new ProdutoInvestimentoUseCase(_repositoryMock.Object, _unitOfWorkMock.Object);
+        _loggerMock = new Mock<ILogger<ProdutoInvestimentoUseCase>>();
+
+        _useCase = new ProdutoInvestimentoUseCase(
+            _repositoryMock.Object,
+            _unitOfWorkMock.Object,
+            _loggerMock.Object
+        );
     }
 
     [Fact]

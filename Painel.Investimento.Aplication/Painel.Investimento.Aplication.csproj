@@ -12,11 +12,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Painel.Investimento.Domain\Painel.Investimento.Domain.csproj" />
-    <ProjectReference Include="..\using Painel.Investimento.Domain\Painel.Investimento.Domain.csproj" />
+    
   </ItemGroup>
 
 </Project>

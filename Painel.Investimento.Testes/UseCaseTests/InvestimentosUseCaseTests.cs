@@ -1,7 +1,11 @@
 ﻿using Moq;
+using Xunit;
+using Microsoft.Extensions.Logging;
 using Painel.Investimento.Aplication.UseCaseInvestimentos;
 using Painel.Investimento.Domain.Models;
 using Painel.Investimento.Domain.Repository.Abstract;
+using System;
+using System.Threading.Tasks;
 
 namespace Painel.Investimento.Testes.UseCaseTests
 {
@@ -11,6 +15,7 @@ namespace Painel.Investimento.Testes.UseCaseTests
         private readonly Mock<IClienteRepository> _clienteRepoMock;
         private readonly Mock<IProdutoInvestimentoRepository> _produtoRepoMock;
         private readonly Mock<IUnitOfWork> _unitOfWorkMock;
+        private readonly Mock<ILogger<InvestimentosUseCase>> _loggerMock;
         private readonly InvestimentosUseCase _useCase;
 
         public InvestimentosUseCaseTests()
@@ -19,17 +24,17 @@ namespace Painel.Investimento.Testes.UseCaseTests
             _clienteRepoMock = new Mock<IClienteRepository>();
             _produtoRepoMock = new Mock<IProdutoInvestimentoRepository>();
             _unitOfWorkMock = new Mock<IUnitOfWork>();
+            _loggerMock = new Mock<ILogger<InvestimentosUseCase>>();
 
             _useCase = new InvestimentosUseCase(
                 _investimentosRepoMock.Object,
                 _clienteRepoMock.Object,
                 _produtoRepoMock.Object,
                 _investimentosRepoMock.Object, // usado também como _investimento
-                _unitOfWorkMock.Object
+                _unitOfWorkMock.Object,
+                _loggerMock.Object
             );
         }
-
-        
 
         [Fact]
         public async Task RegistrarAsync_DeveLancarExcecao_QuandoClienteNaoExiste()

@@ -21,10 +21,25 @@ namespace Painel.Investimento.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UsuarioDto>> GetById(int id)
         {
-            var usuario = await _context.Usuarios.FindAsync(id);
-            if (usuario == null) return NotFound();
+            try
+            {
+                var usuario = await _context.Usuarios.FindAsync(id);
+                if (usuario == null)
+                    return NotFound("Usuário não encontrado.");
 
-            return Ok(_mapper.Map<UsuarioDto>(usuario));
+                var dto = _mapper.Map<UsuarioDto>(usuario);
+                return Ok(dto);
+            }
+            catch (ArgumentException ex)
+            {
+                // Exemplo: se o parâmetro id for inválido
+                return BadRequest($"Parâmetro inválido: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Captura qualquer erro inesperado
+                return StatusCode(500, $"Erro ao buscar usuário: {ex.Message}");
+            }
         }
     }
 }

@@ -23,40 +23,70 @@ namespace Painel.Investimento.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PerfilProdutoRequestDto dto)
         {
-            var perfilProduto = await _useCase.VincularAsync(dto.PerfilDeRiscoId, dto.ProdutoInvestimentoId);
+            try
+            {
+                var perfilProduto = await _useCase.VincularAsync(dto.PerfilDeRiscoId, dto.ProdutoInvestimentoId);
+                if (perfilProduto == null)
+                    return BadRequest("Não foi possível vincular o perfil ao produto.");
 
-            var response = _mapper.Map<PerfilProdutoResponseDto>(perfilProduto);
-            return Ok(response);
+                var response = _mapper.Map<PerfilProdutoResponseDto>(perfilProduto);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao vincular perfil ao produto: {ex.Message}");
+            }
         }
 
         // ✅ GET: api/perfilproduto
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var perfilProdutos = await _useCase.ListarTodosAsync();
-            var response = _mapper.Map<IEnumerable<PerfilProdutoResponseDto>>(perfilProdutos);
-            return Ok(response);
+            try
+            {
+                var perfilProdutos = await _useCase.ListarTodosAsync();
+                var response = _mapper.Map<IEnumerable<PerfilProdutoResponseDto>>(perfilProdutos);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao listar perfis de produto: {ex.Message}");
+            }
         }
 
         // ✅ GET: api/perfilproduto/{perfilDeRiscoId}/{produtoInvestimentoId}
         [HttpGet("{perfilDeRiscoId:int}/{produtoInvestimentoId:int}")]
         public async Task<IActionResult> GetByIds(int perfilDeRiscoId, int produtoInvestimentoId)
         {
-            var perfilProduto = await _useCase.ObterPorIdsAsync(perfilDeRiscoId, produtoInvestimentoId);
-            if (perfilProduto == null) return NotFound();
+            try
+            {
+                var perfilProduto = await _useCase.ObterPorIdsAsync(perfilDeRiscoId, produtoInvestimentoId);
+                if (perfilProduto == null) return NotFound("Perfil ou produto não encontrado.");
 
-            var response = _mapper.Map<PerfilProdutoResponseDto>(perfilProduto);
-            return Ok(response);
+                var response = _mapper.Map<PerfilProdutoResponseDto>(perfilProduto);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao buscar perfil de produto: {ex.Message}");
+            }
         }
 
         // ✅ DELETE: api/perfilproduto/{perfilDeRiscoId}/{produtoInvestimentoId}
         [HttpDelete("{perfilDeRiscoId:int}/{produtoInvestimentoId:int}")]
         public async Task<IActionResult> Delete(int perfilDeRiscoId, int produtoInvestimentoId)
         {
-            var removido = await _useCase.RemoverAsync(perfilDeRiscoId, produtoInvestimentoId);
-            if (!removido) return NotFound();
+            try
+            {
+                var removido = await _useCase.RemoverAsync(perfilDeRiscoId, produtoInvestimentoId);
+                if (!removido) return NotFound("Perfil ou produto não encontrado para remoção.");
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao remover perfil de produto: {ex.Message}");
+            }
         }
     }
 }

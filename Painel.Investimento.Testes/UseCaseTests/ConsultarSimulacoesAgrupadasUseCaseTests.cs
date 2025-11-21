@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Moq;
 using Xunit;
+using Microsoft.Extensions.Logging;
 using Painel.Investimento.Aplication.useCaseSimulacoes;
 using Painel.Investimento.Domain.Dtos;
 using Painel.Investimento.Domain.Repository.Abstract;
@@ -12,12 +14,18 @@ namespace Painel.Investimento.Testes.UseCaseTests
     public class ConsultarSimulacoesAgrupadasUseCaseTests
     {
         private readonly Mock<ISimulacaoRepository> _simulacaoRepoMock;
+        private readonly Mock<ILogger<ConsultarSimulacoesAgrupadasUseCase>> _loggerMock;
         private readonly ConsultarSimulacoesAgrupadasUseCase _useCase;
 
         public ConsultarSimulacoesAgrupadasUseCaseTests()
         {
             _simulacaoRepoMock = new Mock<ISimulacaoRepository>();
-            _useCase = new ConsultarSimulacoesAgrupadasUseCase(_simulacaoRepoMock.Object);
+            _loggerMock = new Mock<ILogger<ConsultarSimulacoesAgrupadasUseCase>>();
+
+            _useCase = new ConsultarSimulacoesAgrupadasUseCase(
+                _simulacaoRepoMock.Object,
+                _loggerMock.Object
+            );
         }
 
         [Fact]
@@ -54,6 +62,17 @@ namespace Painel.Investimento.Testes.UseCaseTests
             Assert.Equal(2, resultado.Count());
             Assert.Contains(resultado, s => s.Produto == "CDB" && s.QuantidadeSimulacoes == 2);
             Assert.Contains(resultado, s => s.Produto == "LCI" && s.MediaValorFinal == 2300);
+
+            // Verifica se o logger foi chamado
+            _loggerMock.Verify(
+                        l => l.Log(
+                            LogLevel.Information,
+                            It.IsAny<EventId>(),
+                            It.IsAny<It.IsAnyType>(),
+                            It.IsAny<Exception>(),
+                            It.IsAny<Func<It.IsAnyType, Exception, string>>()),
+                        Times.AtLeastOnce);
+
         }
 
         [Fact]
@@ -70,6 +89,20 @@ namespace Painel.Investimento.Testes.UseCaseTests
             // Assert
             Assert.NotNull(resultado);
             Assert.Empty(resultado);
+
+            // Verifica se o logger registrou o aviso
+           
+               _loggerMock.Verify(
+                l => l.Log(
+                    LogLevel.Information,
+                    It.IsAny<EventId>(),
+                    It.IsAny<It.IsAnyType>(),
+                    It.IsAny<Exception>(),
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>()),
+                Times.AtLeastOnce);
+                    
+
         }
+
     }
 }

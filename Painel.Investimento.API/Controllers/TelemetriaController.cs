@@ -18,8 +18,25 @@ namespace Painel.Investimento.API.Controllers
         [HttpGet]
         public ActionResult<TelemetriaResponse> GetTelemetria([FromQuery] DateTime inicio, [FromQuery] DateTime fim)
         {
-            var relatorio = _telemetriaService.ObterRelatorio(inicio, fim);
-            return Ok(relatorio);
+            try
+            {
+                var relatorio = _telemetriaService.ObterRelatorio(inicio, fim);
+
+                if (relatorio == null)
+                    return NotFound("Nenhum dado de telemetria encontrado para o período informado.");
+
+                return Ok(relatorio);
+            }
+            catch (ArgumentException ex)
+            {
+                // Exemplo: se parâmetros de data forem inválidos
+                return BadRequest($"Parâmetros inválidos: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Captura qualquer erro inesperado
+                return StatusCode(500, $"Erro ao obter telemetria: {ex.Message}");
+            }
         }
     }
 }

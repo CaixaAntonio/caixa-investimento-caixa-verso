@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Moq;
 using Xunit;
+using Microsoft.Extensions.Logging;
 using Painel.Investimento.Aplication.UseCasesProdutos;
 using Painel.Investimento.Domain.Models;
 using Painel.Investimento.Domain.Repository.Abstract;
@@ -10,13 +11,20 @@ public class PerfilProdutoUseCaseTests
 {
     private readonly Mock<IPerfilProdutoRepository> _repositoryMock;
     private readonly Mock<IUnitOfWork> _unitOfWorkMock;
+    private readonly Mock<ILogger<PerfilProdutoUseCase>> _loggerMock;
     private readonly PerfilProdutoUseCase _useCase;
 
     public PerfilProdutoUseCaseTests()
     {
         _repositoryMock = new Mock<IPerfilProdutoRepository>();
         _unitOfWorkMock = new Mock<IUnitOfWork>();
-        _useCase = new PerfilProdutoUseCase(_repositoryMock.Object, _unitOfWorkMock.Object);
+        _loggerMock = new Mock<ILogger<PerfilProdutoUseCase>>();
+
+        _useCase = new PerfilProdutoUseCase(
+            _repositoryMock.Object,
+            _unitOfWorkMock.Object,
+            _loggerMock.Object
+        );
     }
 
     [Fact]

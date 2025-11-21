@@ -43,7 +43,7 @@
     <ProjectReference Include="..\Painel.Investimento.Aplication\Painel.Investimento.Aplication.csproj" />   
     <ProjectReference Include="..\Painel.Investimento.Domain\Painel.Investimento.Domain.csproj" />   
     <ProjectReference Include="..\Painel.investimento.Infra\Painel.investimento.Infra.csproj" />   
-    <ProjectReference Include="..\using Painel.Investimento.Domain\Painel.Investimento.Domain.csproj" />
+   
   </ItemGroup>
 
 </Project>

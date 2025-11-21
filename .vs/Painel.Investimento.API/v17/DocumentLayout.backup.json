@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\gabri\\OneDrive\\Documentos\\Caixa-Investimento-CV\\caixa-investimento-caixa-verso\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{644139EB-0FC7-4982-8F51-D12550CECDBA}|Painel.Investimento.Testes\\Painel.Investimento.Testes.csproj|c:\\users\\gabri\\onedrive\\documentos\\caixa-investimento-cv\\caixa-investimento-caixa-verso\\painel.investimento.testes\\usecasetests\\consultarsimulacoesagrupadasusecasetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{644139EB-0FC7-4982-8F51-D12550CECDBA}|Painel.Investimento.Testes\\Painel.Investimento.Testes.csproj|solutionrelative:painel.investimento.testes\\usecasetests\\consultarsimulacoesagrupadasusecasetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ConsultarSimulacoesAgrupadasUseCaseTests.cs",
+              "DocumentMoniker": "C:\\Users\\gabri\\OneDrive\\Documentos\\Caixa-Investimento-CV\\caixa-investimento-caixa-verso\\Painel.Investimento.Testes\\UseCaseTests\\ConsultarSimulacoesAgrupadasUseCaseTests.cs",
+              "RelativeDocumentMoniker": "Painel.Investimento.Testes\\UseCaseTests\\ConsultarSimulacoesAgrupadasUseCaseTests.cs",
+              "ToolTip": "C:\\Users\\gabri\\OneDrive\\Documentos\\Caixa-Investimento-CV\\caixa-investimento-caixa-verso\\Painel.Investimento.Testes\\UseCaseTests\\ConsultarSimulacoesAgrupadasUseCaseTests.cs",
+              "RelativeToolTip": "Painel.Investimento.Testes\\UseCaseTests\\ConsultarSimulacoesAgrupadasUseCaseTests.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAAEQAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T12:46:00.359Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

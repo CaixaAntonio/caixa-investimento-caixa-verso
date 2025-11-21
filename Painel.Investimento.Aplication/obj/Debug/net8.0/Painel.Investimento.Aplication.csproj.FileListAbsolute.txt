@@ -1,0 +1,16 @@
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\bin\Debug\net8.0\Painel.Investimento.Aplication.deps.json
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\bin\Debug\net8.0\Painel.Investimento.Aplication.dll
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\bin\Debug\net8.0\Painel.Investimento.Aplication.pdb
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\bin\Debug\net8.0\Painel.Investimento.Domain.dll
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\bin\Debug\net8.0\Painel.Investimento.Domain.pdb
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\obj\Debug\net8.0\Painel.Investimento.Aplication.csproj.AssemblyReference.cache
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\obj\Debug\net8.0\Painel.Investimento.Aplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\obj\Debug\net8.0\Painel.Investimento.Aplication.AssemblyInfoInputs.cache
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\obj\Debug\net8.0\Painel.Investimento.Aplication.AssemblyInfo.cs
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\obj\Debug\net8.0\Painel.Investimento.Aplication.csproj.CoreCompileInputs.cache
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\obj\Debug\net8.0\Painel.Investimento.Aplication.sourcelink.json
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\obj\Debug\net8.0\Painel.I.72951F62.Up2Date
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\obj\Debug\net8.0\Painel.Investimento.Aplication.dll
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\obj\Debug\net8.0\refint\Painel.Investimento.Aplication.dll
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\obj\Debug\net8.0\Painel.Investimento.Aplication.pdb
+C:\Users\gabri\OneDrive\Documentos\Caixa-Investimento-CV\caixa-investimento-caixa-verso\Painel.Investimento.Aplication\obj\Debug\net8.0\ref\Painel.Investimento.Aplication.dll

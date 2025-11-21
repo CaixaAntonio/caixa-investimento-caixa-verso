@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
 using Xunit;
+using Microsoft.Extensions.Logging;
 using Painel.Investimento.Aplication.useCaseSimulacoes;
 using Painel.Investimento.Domain.Dtos;
 using Painel.Investimento.Domain.Models;
@@ -13,6 +14,7 @@ public class SimularInvestimentoUseCaseTests
     private readonly Mock<IProdutoInvestimentoRepository> _produtoRepoMock;
     private readonly Mock<ISimulacaoRepository> _simulacaoRepoMock;
     private readonly Mock<IUnitOfWork> _unitOfWorkMock;
+    private readonly Mock<ILogger<SimularInvestimentoUseCase>> _loggerMock;
     private readonly SimularInvestimentoUseCase _useCase;
 
     public SimularInvestimentoUseCaseTests()
@@ -20,11 +22,13 @@ public class SimularInvestimentoUseCaseTests
         _produtoRepoMock = new Mock<IProdutoInvestimentoRepository>();
         _simulacaoRepoMock = new Mock<ISimulacaoRepository>();
         _unitOfWorkMock = new Mock<IUnitOfWork>();
+        _loggerMock = new Mock<ILogger<SimularInvestimentoUseCase>>();
 
         _useCase = new SimularInvestimentoUseCase(
             _produtoRepoMock.Object,
             _simulacaoRepoMock.Object,
-            _unitOfWorkMock.Object
+            _unitOfWorkMock.Object,
+            _loggerMock.Object
         );
     }
 
@@ -96,12 +100,9 @@ public class SimularInvestimentoUseCaseTests
         // Assert
         Assert.NotNull(response);
         Assert.Equal(simulacao.Id, response.SimulacaoId);
-        Assert.False(response.EhRentavel); // agora espera false
+        Assert.False(response.EhRentavel); // espera false
         Assert.Equal(simulacao.ValorFinal, response.ValorFinal);
     }
-
-
-
 
     [Fact]
     public async Task CalcularRentabilidadeAsync_DeveLancarExcecao_QuandoSimulacaoNaoEncontrada()
